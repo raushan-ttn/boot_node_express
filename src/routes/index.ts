@@ -8,10 +8,37 @@ import {
 
 const router = Router();
 
+/**
+ * @swagger
+ * /api/v1/:
+ *   get:
+ *     summary: homepage response
+ *     description: Returns a sample response from the API
+ *     tags:
+ *       - Home page
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 router.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to the Express TypeScript API!");
+  const message = {
+    message: "Welcome to the BootCamp Express TypeScript API!",
+  };
+  res.send(message);
 });
 
+/**
+ * @swagger
+ * /api/v1/read-file-sync:
+ *   get:
+ *     summary: Read text file sync response
+ *     description: Returns a sample response from the API
+ *     tags:
+ *       - Home page
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 router.get("/read-file-sync", (req: Request, res: Response) => {
   try {
     const fileName = "multilang.txt";
@@ -23,6 +50,18 @@ router.get("/read-file-sync", (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/v1/read-file-async:
+ *   get:
+ *     summary: Read pdf file async response
+ *     description: Returns a sample response from the API
+ *     tags:
+ *       - Home page
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 router.get("/read-file-async", async (req: Request, res: Response) => {
   try {
     const fileName = "dummy-1.5-MB.pdf";

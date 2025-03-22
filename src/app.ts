@@ -2,9 +2,12 @@ import express, { Application } from "express";
 import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";
 import { BACKEND_CONFIG } from "./utils/constant";
+import { setupSwagger } from "./swagger";
 import path from "path";
 
 const app: Application = express();
+// Setup Swagger
+setupSwagger(app);
 
 // Constants
 const apiPrefix = BACKEND_CONFIG.GLOBAL.API_PREFIX;

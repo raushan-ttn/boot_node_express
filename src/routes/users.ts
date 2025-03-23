@@ -1,5 +1,9 @@
 import { Router, Request, Response } from "express";
-import { getAllUsers, createUser } from "../controllers/userController";
+import {
+  getAllUsers,
+  createUser,
+  findAllUsers,
+} from "../controllers/userController";
 
 const router = Router();
 
@@ -91,4 +95,54 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/v1/users/search-user:
+ *   get:
+ *     summary: AutoComplete search for users
+ *     description: Returns a list of users matching the search query.
+ *     tags:
+ *       - Users
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Partial search term for username or email
+ *     responses:
+ *       200:
+ *         description: A list of matching users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   username:
+ *                     type: string
+ *                   mail:
+ *                     type: string
+ *       400:
+ *         description: Missing search query
+ */
+router.get("/search-user", async (req: Request, res: Response) => {
+  const params = req.query.query as string;
+  console.log(params);
+  const user = await findAllUsers(params);
+  if (user && user.success) {
+    res.json({
+      status: 200,
+      message: "Record fetched successfully.",
+      data: user?.data ?? [],
+    });
+  } else {
+    res.json({ status: 404, message: user?.message, data: [] });
+  }
+});
+
 export default router;
+

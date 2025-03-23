@@ -85,3 +85,20 @@ export const createUser = async (user: createUserParams) => {
     };
   }
 };
+
+export const findAllUsers = async (params: string | undefined) => {
+  const users = await User.searchAllUsers(params);
+  if (users) {
+    return {
+      success: true,
+      message: "User fetched successfully.",
+      data: users,
+    };
+  } else {
+    return {
+      success: false,
+      message: "No record found.",
+      data: [],
+    };
+  }
+};

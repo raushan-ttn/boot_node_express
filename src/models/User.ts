@@ -90,6 +90,27 @@ class User {
     }
   }
 
+  // Search user by username
+  static async searchAllUsers(username: string | undefined) {
+    let query = "";
+    let params: string[] = [];
+
+    try {
+      if (username) {
+        query = `SELECT * FROM users WHERE username ILIKE $1;`;
+        params = [`%${username}%`];
+      } else {
+        query = `SELECT * FROM users;`;
+      }
+      console.log("Executing Query:", query, "Params:", params);
+      const result = await pool.query(query, params);
+      return result.rows;
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      throw error;
+    }
+  }
+
   // Update user login time
   static async updateLoginTime(id: number) {
     const query = `

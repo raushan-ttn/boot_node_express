@@ -3,6 +3,7 @@ import {
   getAllUsers,
   createUser,
   findAllUsers,
+  deleteUserById,
 } from "../controllers/userController";
 
 const router = Router();
@@ -21,6 +22,43 @@ const router = Router();
  */
 router.get("/", async (req: Request, res: Response) => {
   const users = await getAllUsers();
+  if (users) {
+    res.json({
+      status: 200,
+      message: "Record fetch successfully.",
+      data: users,
+    });
+  } else {
+    res.json({ status: 404, message: "No record found.", data: [] });
+  }
+});
+
+/**
+ * @swagger
+ * /api/v1/users/{id}:
+ *   delete:
+ *     summary: Delete a user by ID
+ *     description: Removes a user from the database based on the provided ID.
+ *     tags:
+ *       - Users
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the user to delete
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+router.delete("/:id", async (req: Request, res: Response) => {
+  const id = req.params.id ? parseInt(req.params.id) : 0;
+  const users = await deleteUserById(id);
   if (users) {
     res.json({
       status: 200,
@@ -145,4 +183,3 @@ router.get("/search-user", async (req: Request, res: Response) => {
 });
 
 export default router;
-

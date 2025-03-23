@@ -127,7 +127,7 @@ class User {
 
   // Delete user by ID
   static async deleteUser(id: number) {
-    const query = `DELETE FROM users WHERE id = $1 RETURNING *;`;
+    const query = `DELETE FROM users WHERE id = $1;`;
     try {
       const result = await pool.query(query, [id]);
       return result.rows[0];

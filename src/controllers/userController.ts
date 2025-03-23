@@ -102,3 +102,11 @@ export const findAllUsers = async (params: string | undefined) => {
     };
   }
 };
+
+export const deleteUserById = async (id: number) => {
+  const users = await User.deleteUser(id);
+  if (users) {
+    return users;
+  }
+  return null;
+};

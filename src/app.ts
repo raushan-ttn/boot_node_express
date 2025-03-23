@@ -1,5 +1,5 @@
 import express, { Application } from "express";
-import indexRouter from "./routes/index";
+import basicRouter from "./routes/basic";
 import usersRouter from "./routes/users";
 import { BACKEND_CONFIG } from "./utils/constant";
 import { setupSwagger } from "./swagger";
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use(`${apiPrefix}/`, indexRouter);
+app.use(`${apiPrefix}/basic`, basicRouter);
 app.use(`${apiPrefix}/users`, usersRouter);
 
 export default app;

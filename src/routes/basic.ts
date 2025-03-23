@@ -10,12 +10,12 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/:
+ * /api/v1/basic:
  *   get:
  *     summary: homepage response
  *     description: Returns a sample response from the API
  *     tags:
- *       - Home page
+ *       - Basic
  *     responses:
  *       200:
  *         description: A successful response
@@ -29,12 +29,12 @@ router.get("/", (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/read-file-sync:
+ * /api/v1/basic/read-file-sync:
  *   get:
  *     summary: Read text file sync response
  *     description: Returns a sample response from the API
  *     tags:
- *       - Home page
+ *       - File System
  *     responses:
  *       200:
  *         description: A successful response
@@ -52,12 +52,12 @@ router.get("/read-file-sync", (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/v1/read-file-async:
+ * /api/v1/basic/read-file-async:
  *   get:
  *     summary: Read pdf file async response
  *     description: Returns a sample response from the API
  *     tags:
- *       - Home page
+ *       - File System
  *     responses:
  *       200:
  *         description: A successful response
